@@ -50,6 +50,7 @@ namespace TinyHero.Camera
         {
             _axiInputController = GetComponent<CinemachineInputAxisController>();
             _orbitalFollow = GetComponent<CinemachineOrbitalFollow>();
+            _mainCamera = UnityEngine.Camera.main.transform;
         }
         private void subscribeToEvents()
         {

@@ -8,6 +8,11 @@ namespace TinyHero.Enums.Player
         Run,
         Jump_Normal,
         Jump_Double,
-        Jump_Spin
+        Jump_Spin,
+        Idle_Battle,
+        Walk_Forward_Battle,
+        Walk_Back_Battle,
+        Walk_Right_Side_Battle,
+        Walk_Left_Side_Battle
     }
 }

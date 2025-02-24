@@ -13,6 +13,10 @@ namespace TinyHero.Player
         public static event Action OnCombatStyleEnded;
         #endregion
 
+        #region Private Fields
+        private bool _isInCombat;
+        #endregion
+
         #region Mono
         private void Awake()
         {
@@ -41,12 +45,17 @@ namespace TinyHero.Player
         private void OnEnemyDeselection()
         {
             OnCombatStyleEnded?.Invoke();
+            _isInCombat = false;
         }
         private void OnEnemySelected(GameObject obj)
         {
             OnCombatStyleStarted?.Invoke(obj.transform);
+            _isInCombat = true;
         }
         #endregion
 
+        #region Properties
+        public bool IsIncombat { get => _isInCombat; }
+        #endregion
     }
 }

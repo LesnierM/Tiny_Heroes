@@ -18,6 +18,7 @@ namespace TinyHero.Player
         private Animator _animator;
         private playerGroundCheckController _groundCheckController;
         private playerJumpController _jumpController;
+        private playerCombatController _combatController;
         #endregion
 
         #region Private Fields
@@ -45,17 +46,43 @@ namespace TinyHero.Player
         {
             if (_groundCheckController.IsGrounded)
             {
-                if (InputManager.Instance.MoveInput.sqrMagnitude != 0)
-                {
-                    if (InputManager.Instance.IsRunningPressed)
-                        changeState(PlayerAnimationStateTypes.Run);
-                    else
-                        changeState(PlayerAnimationStateTypes.Walk_Normal);
-                }
+                if (!_combatController.IsIncombat)
+                    nonCombatLogic();
                 else
-                    changeState(PlayerAnimationStateTypes.Idle_Normal);
+                    combatLogic();
             }
         }
+        private void combatLogic()
+        {
+            Vector2 input = InputManager.Instance.MoveInput;
+
+            if (input.sqrMagnitude != 0)
+            {
+                if (input.y > 0)
+                    changeState(PlayerAnimationStateTypes.Walk_Forward_Battle);
+                else if (input.y < 0)
+                    changeState(PlayerAnimationStateTypes.Walk_Back_Battle);
+                else if (input.y == 0 && input.x > 0)
+                    changeState(PlayerAnimationStateTypes.Walk_Right_Side_Battle);
+                else if (input.y == 0 && input.x < 0)
+                    changeState(PlayerAnimationStateTypes.Walk_Left_Side_Battle);
+            }
+            else
+                changeState(PlayerAnimationStateTypes.Idle_Battle);
+        }
+        private void nonCombatLogic()
+        {
+            if (InputManager.Instance.MoveInput.sqrMagnitude != 0)
+            {
+                if (InputManager.Instance.IsRunningPressed)
+                    changeState(PlayerAnimationStateTypes.Run);
+                else
+                    changeState(PlayerAnimationStateTypes.Walk_Normal);
+            }
+            else
+                changeState(PlayerAnimationStateTypes.Idle_Normal);
+        }
+
         private void changeState(PlayerAnimationStateTypes newState)
         {
             if (_currentState == newState)
@@ -70,6 +97,7 @@ namespace TinyHero.Player
         private void getReferences()
         {
             _animator = GetComponentInChildren<Animator>();
+            _combatController = GetComponent<playerCombatController>();
             _groundCheckController = GetComponentInChildren<playerGroundCheckController>();
             _jumpController = GetComponentInChildren<playerJumpController>();
         }

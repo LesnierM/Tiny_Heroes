@@ -6,6 +6,8 @@ using UnityEngine;
 namespace TinyHero.Player
 {
     [RequireComponent(typeof(CharacterController))]
+    [RequireComponent(typeof(playerCombatController))]
+    [RequireComponent(typeof(playerAnimationController))]
     public class playerJumpController : MonoBehaviour
     {
         #region Actions
@@ -25,6 +27,7 @@ namespace TinyHero.Player
         private CharacterController _characterController;
         private playerGroundCheckController _groundCheckController;
         private playerAnimationController _animationController;
+        private playerCombatController _combatController;
 
         private float _currentVerticalSpeed;
         #endregion
@@ -46,12 +49,13 @@ namespace TinyHero.Player
             _characterController = GetComponent<CharacterController>();
             _groundCheckController = GetComponentInChildren<playerGroundCheckController>();
             _animationController = GetComponentInChildren<playerAnimationController>();
+            _combatController = GetComponentInChildren<playerCombatController>();
         }
         private void jump()
         {
             this.DebugMessage($"Is grounded {_groundCheckController.IsGrounded}");
 
-            if ((_groundCheckController.IsGrounded || _animationController.IsNormalJump || _animationController.IsDoubleJump) && InputManager.Instance.JumpingPressedInThisFrame)
+            if (!_combatController.IsIncombat && (_groundCheckController.IsGrounded || _animationController.IsNormalJump || _animationController.IsDoubleJump) && InputManager.Instance.JumpingPressedInThisFrame)
             {
                 OnJump?.Invoke();
 
