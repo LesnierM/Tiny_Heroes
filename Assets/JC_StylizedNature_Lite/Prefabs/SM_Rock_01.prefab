@@ -12,13 +12,13 @@ GameObject:
   - component: {fileID: 3223588787500812158}
   - component: {fileID: 1751531206059964433}
   - component: {fileID: 7617851576497350561}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Rock_01_LOD1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &975660985502538798
 Transform:
   m_ObjectHideFlags: 0
@@ -59,6 +59,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
@@ -117,7 +120,7 @@ GameObject:
   - component: {fileID: 999742793123152250}
   - component: {fileID: 8080529600532774140}
   - component: {fileID: 3447313376563957250}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: SM_Rock_01_LOD0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,6 +167,9 @@ MeshRenderer:
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:

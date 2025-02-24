@@ -74,7 +74,7 @@ namespace TinyHero
     /// }
     /// </code>
     /// </example>
-    public partial class @InputActions: IInputActionCollection2, IDisposable
+    public partial class InputContorller: IInputActionCollection2, IDisposable
     {
         /// <summary>
         /// Provides access to the underlying asset instance.
@@ -84,7 +84,7 @@ namespace TinyHero
         /// <summary>
         /// Constructs a new instance.
         /// </summary>
-        public @InputActions()
+        public InputContorller()
         {
             asset = InputActionAsset.FromJson(@"{
     ""name"": ""InputSystem_Actions"",
@@ -1168,7 +1168,7 @@ namespace TinyHero
             m_UI_TrackedDeviceOrientation = m_UI.FindAction("TrackedDeviceOrientation", throwIfNotFound: true);
         }
 
-        ~@InputActions()
+        ~InputContorller()
         {
             UnityEngine.Debug.Assert(!m_Player.enabled, "This will cause a leak and performance issues, InputActions.Player.Disable() has not been called.");
             UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
@@ -1261,12 +1261,12 @@ namespace TinyHero
         /// </summary>
         public struct PlayerActions
         {
-            private @InputActions m_Wrapper;
+            private InputContorller m_Wrapper;
 
             /// <summary>
             /// Construct a new instance of the input action map wrapper class.
             /// </summary>
-            public PlayerActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public PlayerActions(InputContorller wrapper) { m_Wrapper = wrapper; }
             /// <summary>
             /// Provides access to the underlying input action "Player/Move".
             /// </summary>
@@ -1446,12 +1446,12 @@ namespace TinyHero
         /// </summary>
         public struct UIActions
         {
-            private @InputActions m_Wrapper;
+            private InputContorller m_Wrapper;
 
             /// <summary>
             /// Construct a new instance of the input action map wrapper class.
             /// </summary>
-            public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+            public UIActions(InputContorller wrapper) { m_Wrapper = wrapper; }
             /// <summary>
             /// Provides access to the underlying input action "UI/Navigate".
             /// </summary>
