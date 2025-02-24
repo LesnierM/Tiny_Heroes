@@ -1,5 +1,4 @@
 using PGCTools.MethodExtensions;
-using System;
 using TinyHero.Input;
 using UnityEngine;
 
@@ -41,7 +40,7 @@ namespace TinyHero.Player
         #region Private Methods
         private void getReferences()
         {
-            _mainCamera = Camera.main.transform;
+            _mainCamera = UnityEngine.Camera.main.transform;
             _characterController = GetComponent<CharacterController>();
         }
         private void move()
@@ -66,7 +65,7 @@ namespace TinyHero.Player
             if (_input.sqrMagnitude == 0)
                 return;
 
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_characterController.velocity.ZerOtherAxys(Vector3.forward,Vector3.right)), _rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_characterController.velocity.ZerOtherAxys(Vector3.forward, Vector3.right)), _rotationSpeed * Time.deltaTime);
         }
         private float getSpeed()
         {

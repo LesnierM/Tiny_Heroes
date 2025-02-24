@@ -16,7 +16,6 @@ namespace TinyHero.Player
 
         #region Private Fields
         private Animator _animator;
-        private CharacterController _characterControler;
         private playerGroundCheckController _groundCheckController;
         private playerJumpController _jumpController;
         #endregion
@@ -46,7 +45,7 @@ namespace TinyHero.Player
         {
             if (_groundCheckController.IsGrounded)
             {
-                if (_characterControler.velocity.ZerOtherAxys(Vector3.forward, Vector3.right).sqrMagnitude != 0)
+                if (InputManager.Instance.MoveInput.sqrMagnitude != 0)
                 {
                     if (InputManager.Instance.IsRunningPressed)
                         changeState(PlayerAnimationStateTypes.Run);
@@ -65,11 +64,12 @@ namespace TinyHero.Player
             _currentState = newState;
 
             _animator.CrossFade(newState.ToString().RemoveCharacters("_"), _animationTransitionDuration);
+
+            this.DebugMessage($"State changed to {_currentState}");
         }
         private void getReferences()
         {
             _animator = GetComponentInChildren<Animator>();
-            _characterControler = GetComponent<CharacterController>();
             _groundCheckController = GetComponentInChildren<playerGroundCheckController>();
             _jumpController = GetComponentInChildren<playerJumpController>();
         }
