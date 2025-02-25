@@ -1,3 +1,4 @@
+using PGCTools.Enums;
 using PGCTools.MethodExtensions;
 using TinyHero.Enums.Player;
 using TinyHero.Input;
@@ -19,6 +20,7 @@ namespace TinyHero.Player
         private playerGroundCheckController _groundCheckController;
         private playerJumpController _jumpController;
         private playerCombatController _combatController;
+        private playerEvadeController _evadeController;
         #endregion
 
         #region Private Fields
@@ -44,7 +46,7 @@ namespace TinyHero.Player
         #region Private Mehtods
         private void checkState()
         {
-            if (_groundCheckController.IsGrounded)
+            if (_groundCheckController.IsGrounded && !_evadeController.IsEvading)
             {
                 if (!_combatController.IsIncombat)
                     nonCombatLogic();
@@ -99,19 +101,43 @@ namespace TinyHero.Player
             _animator = GetComponentInChildren<Animator>();
             _combatController = GetComponent<playerCombatController>();
             _groundCheckController = GetComponentInChildren<playerGroundCheckController>();
+            _evadeController = GetComponentInChildren<playerEvadeController>();
             _jumpController = GetComponentInChildren<playerJumpController>();
         }
         private void subscribeToEvents()
         {
             _jumpController.OnJump += OnJump;
+            playerEvadeController.OnEvadeStarted += OnEvadeStarted;
+            playerEvadeController.OnEvadeEnded += OnEvadeEnded;
         }
         private void unsubscribeFromEvents()
         {
             _jumpController.OnJump -= OnJump;
+            playerEvadeController.OnEvadeStarted -= OnEvadeStarted;
+            playerEvadeController.OnEvadeEnded -= OnEvadeEnded;
         }
         #endregion
 
         #region Events
+        private void OnEvadeEnded()
+        {
+            //changeState(PlayerAnimationStateTypes.Idle_Battle);
+        }
+        private void OnEvadeStarted(Directions direction)
+        {
+            switch (direction)
+            {
+                case Directions.Right:
+                case Directions.Left:
+                case Directions.Front:
+                    changeState(PlayerAnimationStateTypes.Evade_Front);
+                    break;
+                case Directions.Back:
+                    changeState(PlayerAnimationStateTypes.Evade_Back);
+                    break;
+            }
+
+        }
         private void OnJump()
         {
             switch (_currentState)

@@ -13,6 +13,8 @@ namespace TinyHero.Enums.Player
         Walk_Forward_Battle,
         Walk_Back_Battle,
         Walk_Right_Side_Battle,
-        Walk_Left_Side_Battle
+        Walk_Left_Side_Battle,
+        Evade_Front,
+        Evade_Back
     }
 }

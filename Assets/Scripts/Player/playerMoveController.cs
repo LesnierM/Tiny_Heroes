@@ -23,8 +23,10 @@ namespace TinyHero.Player
 
         private CharacterController _characterController;
         private playerCombatController _combatController;
+        private playerEvadeController _evadeController;
 
         private Vector3 _input;
+        private Vector3 _moveDirection;
         #endregion
 
         #region Mono
@@ -37,7 +39,6 @@ namespace TinyHero.Player
         {
             readInput();
             move();
-            rotate();
         }
         private void OnDestroy()
         {
@@ -50,6 +51,7 @@ namespace TinyHero.Player
         {
             _combatController = GetComponent<playerCombatController>();
             _characterController = GetComponent<CharacterController>();
+            _evadeController = GetComponent<playerEvadeController>();
             _mainCamera = UnityEngine.Camera.main.transform;
         }
         private void subscribeToEvents()
@@ -62,6 +64,9 @@ namespace TinyHero.Player
         }
         private void move()
         {
+            if (_evadeController.IsEvading)
+                return;
+
             var speed = getSpeed();
             var cameraForward = getForward();
             var cameraRight = cameraForward.GetRightVectorFromWorldUp(); ;
@@ -70,25 +75,13 @@ namespace TinyHero.Player
             this.DebugMessage($"Camera right {cameraRight}");
 
             var deltaMove = (cameraForward * _input.z + cameraRight * _input.x) * speed * Time.deltaTime;
+            _moveDirection = deltaMove.normalized;
 
             _characterController.Move(deltaMove);
         }
         private void readInput()
         {
             _input = InputManager.Instance.MoveInput.ChangeYToZ();
-        }
-        private void rotate()
-        {
-            if (_input.sqrMagnitude == 0)
-                return;
-
-            if (!_combatController.IsIncombat)
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(_characterController.velocity.ZerOtherAxys(Vector3.forward, Vector3.right)), _rotationSpeed * Time.deltaTime);
-            else
-            {
-                var directionVector = (_combatTarget.position - transform.position).normalized;
-                transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(directionVector), _rotationSpeed * Time.deltaTime);
-            }
         }
         private float getSpeed()
         {
@@ -105,6 +98,10 @@ namespace TinyHero.Player
         {
             _combatTarget = obj.transform;
         }
+        #endregion
+
+        #region Proeprties
+        public Vector3 MoveDirection { get => _moveDirection;}
         #endregion
     }
 }

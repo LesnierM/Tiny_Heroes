@@ -2887,8 +2887,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136385240}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.104847945, y: -0.78627545, z: 0.13906227, w: 0.5928234}
-  m_LocalPosition: {x: 115.342636, y: 2.6408682, z: 117.26297}
+  m_LocalRotation: {x: -0.071594656, y: 0.9131103, z: -0.35723144, w: -0.18300132}
+  m_LocalPosition: {x: 112.38432, y: 5.157714, z: 120.22065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3121,8 +3121,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1192953092}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.104847945, y: -0.78627545, z: 0.13906227, w: 0.5928234}
-  m_LocalPosition: {x: 115.342636, y: 2.6408682, z: 117.26297}
+  m_LocalRotation: {x: -0.071594656, y: 0.9131103, z: -0.35723144, w: -0.18300132}
+  m_LocalPosition: {x: 112.38432, y: 5.157714, z: 120.22065}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3222,10 +3222,10 @@ MonoBehaviour:
   Radius: 10
   Orbits:
     Top:
-      Radius: 4.53
-      Height: 2.89
+      Radius: 4.27
+      Height: 4.44
     Center:
-      Radius: 4.76
+      Radius: 5.11
       Height: 1.53
     Bottom:
       Radius: 2.61
@@ -3233,7 +3233,7 @@ MonoBehaviour:
     SplineCurvature: 1
   RecenteringTarget: 2
   HorizontalAxis:
-    Value: -105.97
+    Value: -157.33432
     Center: 0
     Range: {x: -180, y: 180}
     Wrap: 1
@@ -3243,7 +3243,7 @@ MonoBehaviour:
       Time: 2
     Restrictions: 0
   VerticalAxis:
-    Value: 21.7
+    Value: 40.602234
     Center: 17.5
     Range: {x: -10, y: 45}
     Wrap: 0
@@ -4165,6 +4165,8 @@ GameObject:
   - component: {fileID: 1836681498}
   - component: {fileID: 1836681499}
   - component: {fileID: 1836681500}
+  - component: {fileID: 1836681501}
+  - component: {fileID: 1836681502}
   m_Layer: 0
   m_Name: Hero
   m_TagString: Untagged
@@ -4269,6 +4271,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a07e496fc48c7df4983280981d8f1fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1836681501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836681494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0101080de4c6e5478b08483255825b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _evadeInterval: 0.5
+  _evadeDuration: 0.35
+  _evadeWalkedDistance: 1.5
+--- !u!114 &1836681502
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1836681494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 513da31e327ff8241a77015174e09ccc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _rotationSpeed: 8
 --- !u!1 &1846557589
 GameObject:
   m_ObjectHideFlags: 0

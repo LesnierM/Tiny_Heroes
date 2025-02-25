@@ -1078,11 +1078,9 @@ namespace PGCTools.MethodExtensions
         /// <typeparam name="T"></typeparam>
         /// <param name="value"></param>
         /// <returns></returns>
-        public static Vector3 GetDirectionVector<T>(this T value) where T : Enum
+        public static Vector3 GetDirectionVector(this Directions value)
         {
-            var direction = value.ToString().ToEnum<Directions>();
-
-            switch (direction)
+            switch (value)
             {
                 case Directions.None:
                     return default;

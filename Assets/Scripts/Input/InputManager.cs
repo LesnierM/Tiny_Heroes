@@ -9,6 +9,7 @@ namespace TinyHero.Input
         public static event Action OnTargetSelectionButtonPressed;
         public static event Action OnNext;
         public static event Action OnPrevious;
+        public static event Action OnJump;
         #endregion
 
         #region Private Fields
@@ -33,11 +34,13 @@ namespace TinyHero.Input
         {
             _inputController.Player.CombatTrigger.performed += OnCombatTriggered;
             _inputController.Player.TargetSelection.performed += OnTargetSelection;
-        }
+            _inputController.Player.Jump.performed += OnJumpEvent;
+        }      
         private void unsubscribeFromEents()
         {
             _inputController.Player.CombatTrigger.performed -= OnCombatTriggered;
             _inputController.Player.TargetSelection.performed -= OnTargetSelection;
+            _inputController.Player.Jump.performed -= OnJumpEvent;
         }
         private void initialize()
         {
@@ -65,6 +68,10 @@ namespace TinyHero.Input
         private void OnCombatTriggered(UnityEngine.InputSystem.InputAction.CallbackContext obj)
         {
             OnTargetSelectionButtonPressed?.Invoke();
+        }
+        private void OnJumpEvent(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+        {
+            OnJump?.Invoke();
         }
         #endregion
 
